@@ -321,7 +321,7 @@
         <h3>お気軽にご相談ください</h3>
         <p style="margin-bottom: 24px; color: var(--text-gray);">SNS運用について、まずはLINEまたはメールでお問い合わせください。フットワーク軽く対応いたします。</p>
         <div class="cta-buttons">
-            <a href="https://line.me/ti/p/XnKAJUyUwY" target="_blank" class="cta-btn line">💬 LINEで相談</a>
+            <a href="https://line.me/ti/p/XnKAJUyUwY" target="_blank" class="cta-btn line" onclick="handleLineClick(event)">💬 LINEで相談</a>
             <a href="mailto:keiiwai6405@gmail.com" class="cta-btn email">📧 メールで相談</a>
         </div>
     </div>
@@ -330,6 +330,26 @@
 <footer>
     <p>&copy; 2026 Neighborhoods. All rights reserved.</p>
 </footer>
+
+<script>
+    // LINEリンクの処理（モバイル対応）
+    function handleLineClick(event) {
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        
+        if (isMobile) {
+            const lineAppUrl = 'line://ti/p/XnKAJUyUwY';
+            const lineWebUrl = 'https://line.me/ti/p/XnKAJUyUwY';
+            const startTime = Date.now();
+            window.location.href = lineAppUrl;
+            setTimeout(() => {
+                if (Date.now() - startTime < 2000) {
+                    window.location.href = lineWebUrl;
+                }
+            }, 500);
+            event.preventDefault();
+        }
+    }
+</script>
 
 </body>
 </html>

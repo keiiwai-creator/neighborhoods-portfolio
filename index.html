@@ -805,8 +805,16 @@
 
             .section-subtitle {
                 font-size: 0.85rem;
-                margin-top: -30px;
+                margin-top: 12px;
                 margin-bottom: 40px;
+            }
+            
+            .service-header {
+                margin-bottom: 40px;
+            }
+            
+            .service-header h2.section-title {
+                margin-bottom: 0;
             }
 
             .works-grid {
@@ -999,7 +1007,7 @@
 
 <div class="contact-buttons">
     <a href="mailto:keiiwai6405@gmail.com" class="contact-btn email">📧 メールで相談</a>
-    <a href="https://line.me/ti/p/XnKAJUyUwY" target="_blank" class="contact-btn line">💬 LINEで相談</a>
+    <a href="https://line.me/ti/p/XnKAJUyUwY" target="_blank" class="contact-btn line" id="line-link" onclick="handleLineClick(event)">💬 LINEで相談</a>
     </div>
 
 <footer>
@@ -1021,6 +1029,32 @@
         });
     }, observerOptions);
 
+    // LINEリンクの処理（モバイル対応）
+    function handleLineClick(event) {
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        const lineLink = document.getElementById('line-link');
+        
+        if (isMobile) {
+            // モバイルの場合、line://スキームを試す
+            const lineAppUrl = 'line://ti/p/XnKAJUyUwY';
+            const lineWebUrl = 'https://line.me/ti/p/XnKAJUyUwY';
+            
+            // アプリがインストールされているか確認（タイムアウトで判定）
+            const startTime = Date.now();
+            window.location.href = lineAppUrl;
+            
+            setTimeout(() => {
+                if (Date.now() - startTime < 2000) {
+                    // アプリが開かなかった場合、Web版にフォールバック
+                    window.location.href = lineWebUrl;
+                }
+            }, 500);
+            
+            event.preventDefault();
+        }
+        // デスクトップの場合は通常のリンクでOK
+    }
+    
     // アニメーション対象要素を監視
     document.addEventListener('DOMContentLoaded', () => {
         const animatedElements = document.querySelectorAll('.section-title, .work-card, .service-card, .fade-in-up');
