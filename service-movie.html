@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>動画制作依頼 | Neighborhoods</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --main-red: #E63946;
+            --dark-red: #C1121F;
+            --navy: #1D3557;
+            --dark-gray: #2B2D42;
+            --light-bg: #F8F9FA;
+            --white: #ffffff;
+            --text-dark: #1D3557;
+            --text-gray: #6b6b6b;
+            --shadow-card: 0 10px 40px rgba(230, 57, 70, 0.15);
+            --shadow-card-hover: 0 20px 60px rgba(230, 57, 70, 0.25);
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            line-height: 1.8;
+            background-color: var(--light-bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        header {
+            padding: 24px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-weight: 700;
+            color: var(--main-red);
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--main-red);
+        }
+
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 5%;
+        }
+
+        .article-header {
+            margin-bottom: 60px;
+        }
+
+        .article-category {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--main-red);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+        }
+
+        .article-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--navy);
+            line-height: 1.3;
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .price-badge {
+            display: inline-block;
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--main-red);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 16px;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: var(--text-dark);
+        }
+
+        .article-content h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-top: 60px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(230, 57, 70, 0.2);
+        }
+
+        .article-content h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+
+        .article-content p {
+            margin-bottom: 24px;
+        }
+
+        .article-content ul {
+            margin: 24px 0;
+            padding-left: 24px;
+        }
+
+        .article-content li {
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+
+        .plan-intro {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 60px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin: 60px 0;
+        }
+
+        .plan-card {
+            background: var(--white);
+            border: 2px solid rgba(230, 57, 70, 0.2);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+        }
+
+        .plan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(135deg, var(--main-red) 0%, var(--dark-red) 100%);
+        }
+
+        .plan-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-card-hover);
+            border-color: var(--main-red);
+        }
+
+        .plan-card.matsu {
+            border-color: #8B4513;
+        }
+
+        .plan-card.matsu::before {
+            background: #8B4513;
+        }
+
+        .plan-card.take {
+            border-color: var(--main-red);
+        }
+
+        .plan-card.take::before {
+            background: linear-gradient(135deg, var(--main-red) 0%, var(--dark-red) 100%);
+        }
+
+        .plan-card.ume {
+            border-color: #C71585;
+        }
+
+        .plan-card.ume::before {
+            background: #C71585;
+        }
+
+        .plan-badge {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--white);
+            padding: 6px 16px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .plan-card.matsu .plan-badge {
+            background: #8B4513;
+        }
+
+        .plan-card.take .plan-badge {
+            background: var(--main-red);
+        }
+
+        .plan-card.ume .plan-badge {
+            background: #C71585;
+        }
+
+        .plan-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+
+        .plan-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--main-red);
+            margin-bottom: 20px;
+        }
+
+        .plan-description {
+            font-size: 1rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .plan-note {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-top: 16px;
+            font-style: italic;
+        }
+
+        .section-divider {
+            margin: 80px 0 40px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--navy);
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(230, 57, 70, 0.2);
+        }
+
+        .additional-info {
+            background: rgba(230, 57, 70, 0.1);
+            padding: 32px;
+            border-radius: 16px;
+            margin-top: 60px;
+            text-align: center;
+            font-size: 1rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 40px;
+            color: var(--main-red);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--navy);
+        }
+
+        .back-link::before {
+            content: '← ';
+        }
+
+        .cta-section {
+            background: rgba(230, 57, 70, 0.1);
+            padding: 60px 5%;
+            margin-top: 80px;
+            text-align: center;
+            border-radius: 16px;
+        }
+
+        .cta-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 24px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cta-btn.line {
+            background: #06C755;
+            color: white;
+        }
+
+        .cta-btn.line:hover {
+            background: #05B04A;
+            transform: translateY(-2px);
+        }
+
+        .cta-btn.email {
+            background: linear-gradient(135deg, var(--main-red) 0%, var(--dark-red) 100%);
+            color: white;
+        }
+
+        .cta-btn.email:hover {
+            background: linear-gradient(135deg, var(--dark-red) 0%, var(--main-red) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(230, 57, 70, 0.4);
+        }
+
+        footer {
+            background: var(--navy);
+            color: var(--white);
+            padding: 60px 5%;
+            text-align: center;
+            margin-top: 120px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 4%;
+            }
+
+            .article-container {
+                padding: 40px 4%;
+            }
+
+            .article-title {
+                font-size: 1.8rem;
+            }
+
+            .article-content {
+                font-size: 0.95rem;
+            }
+
+            .article-content h2 {
+                font-size: 1.5rem;
+                margin-top: 40px;
+            }
+
+            .article-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .plans-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .plan-card {
+                padding: 24px;
+            }
+
+            .plan-name {
+                font-size: 1.2rem;
+            }
+
+            .plan-price {
+                font-size: 1.6rem;
+            }
+
+            .section-divider {
+                font-size: 1.1rem;
+                margin: 60px 0 32px;
+            }
+
+            .additional-info {
+                padding: 24px;
+                font-size: 0.95rem;
+            }
+
+            .cta-section {
+                padding: 40px 4%;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .cta-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 16px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .article-container {
+                padding: 30px 4%;
+            }
+
+            .article-title {
+                font-size: 1.6rem;
+            }
+
+            .article-content {
+                font-size: 0.9rem;
+            }
+
+            .article-content h2 {
+                font-size: 1.3rem;
+            }
+
+            .article-content h3 {
+                font-size: 1.1rem;
+            }
+
+            .price-badge {
+                font-size: 1rem;
+                padding: 6px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">Neighborhoods</a>
+    <a href="index.html" class="nav-link">ホームへ戻る</a>
+</header>
+
+<div class="article-container">
+    <a href="index.html" class="back-link">ホームへ戻る</a>
+    
+    <div class="article-header">
+        <div class="article-category">SERVICE</div>
+        <h1 class="article-title">動画制作依頼</h1>
+    </div>
+
+    <div class="article-content">
+        <div class="section-divider">Short系動画（縦型）</div>
+
+        <div class="plans-grid">
+            <div class="plan-card matsu">
+                <div class="plan-badge">松（新規限定）</div>
+                <div class="plan-name">お試し制作プラン/最大3本</div>
+                <div class="plan-price">¥5,000〜/本</div>
+                <div class="plan-description">※2分以内/カット・フルテロップ・SE等。まずはクオリティを確かめたい方向け。</div>
+            </div>
+
+            <div class="plan-card take">
+                <div class="plan-badge">竹</div>
+                <div class="plan-name">SNS動画5本パック</div>
+                <div class="plan-price">¥40,000</div>
+                <div class="plan-description">※1本あたり¥8,000。カバー・サムネイル作成込み、修正2回まで対応。</div>
+            </div>
+
+            <div class="plan-card ume">
+                <div class="plan-badge">梅</div>
+                <div class="plan-name">SNS動画10本パック</div>
+                <div class="plan-price">¥75,000〜</div>
+                <div class="plan-description">※1本あたり¥7,500。継続的な発信を目指す方向け。</div>
+            </div>
+        </div>
+
+        <div class="section-divider">横動画系（YouTube）</div>
+
+        <div class="plans-grid">
+            <div class="plan-card matsu">
+                <div class="plan-badge">松（新規限定）</div>
+                <div class="plan-name">お試し制作プラン/最大1本</div>
+                <div class="plan-price">¥10,000〜</div>
+                <div class="plan-description">※10分以内/カット・フルテロップ・SE等。</div>
+            </div>
+
+            <div class="plan-card take">
+                <div class="plan-badge">竹</div>
+                <div class="plan-name">横動画4本パック</div>
+                <div class="plan-price">¥80,000〜</div>
+                <div class="plan-description">※1本あたり¥20,000。カバー・サムネイル作成込み、修正2回まで対応。</div>
+            </div>
+
+            <div class="plan-card ume">
+                <div class="plan-badge">梅</div>
+                <div class="plan-name">横動画8本パック</div>
+                <div class="plan-price">¥120,000〜</div>
+                <div class="plan-description">※1本あたり¥15,000。高品質な長尺動画の継続発信に。</div>
+            </div>
+        </div>
+
+        <div class="additional-info">
+            <p>企業PR・採用動画の制作(撮影・編集)も承っております。ご相談ください</p>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <h3>お気軽にご相談ください</h3>
+        <p style="margin-bottom: 24px; color: var(--text-gray);">まずはLINEまたはメールでお問い合わせください。フットワーク軽く対応いたします。</p>
+        <div class="cta-buttons">
+            <a href="https://line.me/R/ti/p/@199604146405" target="_blank" class="cta-btn line">💬 LINEで相談</a>
+            <a href="mailto:keiiwai6405@gmail.com" class="cta-btn email">📧 メールで相談</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Neighborhoods. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
+

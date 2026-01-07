@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>プロフィール | Neighborhoods</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --main-red: #E63946;
+            --dark-red: #C1121F;
+            --navy: #1D3557;
+            --dark-gray: #2B2D42;
+            --light-bg: #F8F9FA;
+            --white: #ffffff;
+            --text-dark: #1D3557;
+            --text-gray: #6b6b6b;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            line-height: 1.8;
+            background-color: var(--light-bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header */
+        header {
+            padding: 24px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-weight: 700;
+            color: var(--main-red);
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--main-red);
+        }
+
+        /* Main Content */
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 5%;
+        }
+
+        .article-header {
+            margin-bottom: 60px;
+        }
+
+        .article-category {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--main-red);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+        }
+
+        .article-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.4;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .article-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: 500;
+            color: var(--main-red);
+            margin-bottom: 24px;
+        }
+
+        .profile-image-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 32px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 6px solid var(--main-red);
+            box-shadow: 0 15px 40px rgba(230, 57, 70, 0.2);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .profile-header-text {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .article-date {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: var(--text-dark);
+        }
+
+        .article-content h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-top: 60px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(230, 57, 70, 0.2);
+        }
+
+        .article-content h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+
+        .article-content p {
+            margin-bottom: 24px;
+        }
+
+        .article-content ul {
+            margin: 24px 0;
+            padding-left: 24px;
+        }
+
+        .article-content li {
+            margin-bottom: 12px;
+        }
+
+        .timeline {
+            margin: 40px 0;
+        }
+
+        .timeline-item {
+            padding: 24px 0;
+            border-left: 3px solid var(--light-mint);
+            padding-left: 32px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 28px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--main-red);
+        }
+
+        .timeline-year {
+            font-weight: 700;
+            color: var(--main-red);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .timeline-content {
+            color: var(--text-dark);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: rgba(230, 57, 70, 0.1);
+            padding: 60px 5%;
+            margin-top: 80px;
+            text-align: center;
+            border-radius: 16px;
+        }
+
+        .cta-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 24px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cta-btn.line {
+            background: #06C755;
+            color: white;
+        }
+
+        .cta-btn.line:hover {
+            background: #05B04A;
+            transform: translateY(-2px);
+        }
+
+        .cta-btn.email {
+            background: linear-gradient(135deg, var(--main-red) 0%, var(--dark-red) 100%);
+            color: white;
+        }
+
+        .cta-btn.email:hover {
+            background: linear-gradient(135deg, var(--dark-red) 0%, var(--main-red) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(230, 57, 70, 0.4);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 40px;
+            color: var(--main-red);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--navy);
+        }
+
+        .back-link::before {
+            content: '← ';
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy);
+            color: var(--white);
+            padding: 60px 5%;
+            text-align: center;
+            margin-top: 120px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 4%;
+            }
+
+            .article-container {
+                padding: 40px 4%;
+            }
+
+            .article-title {
+                font-size: 1.6rem;
+            }
+
+            .profile-image-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .profile-image {
+                width: 160px;
+                height: 160px;
+            }
+
+            .article-content {
+                font-size: 0.95rem;
+            }
+
+            .article-content h2 {
+                font-size: 1.5rem;
+                margin-top: 40px;
+            }
+
+            .article-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .timeline-item {
+                padding: 20px 0;
+                padding-left: 24px;
+            }
+
+            .cta-section {
+                padding: 40px 4%;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .cta-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 16px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .article-container {
+                padding: 30px 4%;
+            }
+
+            .article-title {
+                font-size: 1.4rem;
+            }
+
+            .profile-image {
+                width: 140px;
+                height: 140px;
+            }
+
+            .article-content {
+                font-size: 0.9rem;
+            }
+
+            .article-content h2 {
+                font-size: 1.3rem;
+            }
+
+            .article-content h3 {
+                font-size: 1.1rem;
+            }
+
+            .timeline-item {
+                padding-left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">Neighborhoods</a>
+    <a href="index.html" class="nav-link">ホームへ戻る</a>
+</header>
+
+<div class="article-container">
+    <a href="index.html" class="back-link">ホームへ戻る</a>
+    
+    <div class="article-header">
+        <div class="article-category">PROFILE</div>
+        <div class="profile-image-container">
+            <img src="5.jpg" alt="岩井 啓" class="profile-image">
+            <div class="profile-header-text">
+                <h1 class="article-title">岩井 啓（いわい けい）</h1>
+                <div class="article-subtitle">Neighborhoods代表</div>
+                <div class="article-date">出身：東京都大田区</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="article-content">
+        <h2>KEIから皆さまへ</h2>
+        <p>大田区で生まれ育ち、現在は大田区と海外を行き来しながら活動しています。<br>
+        『世界に出る日本人を増やす』ことを人生のミッションに掲げています。<br>
+        また、『同じ視座・熱量で、近所（Neighborhoods）の頼りになる人』をコンセプトに、事業内容に関係なく、常に親しみやすく頼られる存在でありたいと考えています。よろしくお願いします。KEI</p>
+
+        <h2>詳細な経歴</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">2020年</div>
+                <div class="timeline-content">大学卒業。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2020年 - 2022年</div>
+                <div class="timeline-content">不動産会社（シェアハウス）にて管理・運用を担当。入居者対応から物件価値向上に尽力。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2021年 - 2023年</div>
+                <div class="timeline-content">シェアリングエコノミー領域のStart up企業にてCS（カスタマーサクセス）マネージャーに従事。ユーザー体験の最大化を統括。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">2023年 - 現在</div>
+                <div class="timeline-content">カナダにてイベント団体「Mingle」を立ち上げ。SNSのみで毎月新規30名を動員するコミュニティに成長させ、現在も代表を務める。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-year">現在</div>
+                <div class="timeline-content">SNS運用コンサルタントとして上場企業を含む法人4社以上の運用を担当する傍ら、Neighborhoodsを設立。</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <h3>お気軽にご相談ください</h3>
+        <p style="margin-bottom: 24px; color: var(--text-gray);">まずはLINEまたはメールでお問い合わせください。フットワーク軽く対応いたします。</p>
+        <div class="cta-buttons">
+            <a href="https://line.me/R/ti/p/@199604146405" target="_blank" class="cta-btn line">💬 LINEで相談</a>
+            <a href="mailto:keiiwai6405@gmail.com" class="cta-btn email">📧 メールで相談</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Neighborhoods. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
+
