@@ -35,3 +35,5 @@ cd "/Volumes/KEIのSSD/Cursor/portfolio"
 数分後にサイトが公開されます：
 `https://your-username.github.io/neighborhoods-portfolio/`
 
+
+

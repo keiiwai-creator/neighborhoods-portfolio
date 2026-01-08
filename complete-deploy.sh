@@ -57,3 +57,5 @@ echo "   数分後にサイトが公開されます:"
 echo "   https://keiiwai-creator.github.io/neighborhoods-portfolio/"
 echo ""
 
+
+

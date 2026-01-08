@@ -237,6 +237,27 @@
             text-decoration: none;
             display: inline-block;
         }
+        
+        .profile-button {
+            margin-top: 24px;
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--main-red) 0%, var(--dark-red) 100%);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 8px 24px rgba(230, 57, 70, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.5px;
+        }
+        
+        .profile-button:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 32px rgba(230, 57, 70, 0.5);
+            background: linear-gradient(135deg, var(--dark-red) 0%, var(--main-red) 100%);
+        }
 
         /* Section Commons */
         section {
@@ -889,6 +910,12 @@
                 width: 180px;
                 height: 180px;
             }
+            
+            .profile-button {
+                padding: 12px 24px;
+                font-size: 0.85rem;
+                margin-top: 16px;
+            }
 
             section {
                 padding: 50px 4%;
@@ -935,6 +962,7 @@
                 <img src="5.jpg" alt="KEI - Neighborhoods代表">
             </div>
         </a>
+        <a href="profile.html" class="profile-button">代表プロフィール</a>
     </div>
 </section>
 
@@ -992,6 +1020,7 @@
                 <div class="work-category">SOCIAL MEDIA MANAGEMENT</div>
                 <h3>SNS運用実績</h3>
                 <p>上場企業含む法人4社と小規模事業者2社のSNSアカウントを担当。企画・撮影・編集・投稿・分析の全行程に対応可能</p>
+                <p style="margin-top: 12px; font-size: 0.9rem; color: var(--text-gray);">実績は守秘義務上、お問合せいただいた際にお見せいたします。</p>
             </div>
         </div>
         <div class="work-card">
@@ -1000,6 +1029,14 @@
                 <div class="work-category">VIDEO PRODUCTION</div>
                 <h3>動画制作実績</h3>
                 <p>累計1,000本以上の動画制作実績。トレンドを捉えたSNS動画制作を得意とし、セミナーやコーポレート動画も対応可能。撮影もご相談ください。</p>
+                <div style="margin-top: 16px;">
+                    <a href="https://www.youtube.com/@keiiwai-tv" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; color: var(--main-red); text-decoration: none; font-weight: 600; transition: color 0.3s;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                        YouTube
+                    </a>
+                </div>
             </div>
         </div>
     </div>
